@@ -1,0 +1,135 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sportube admin</title>
+    
+    <style>
+        /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Basic styling for the sidebar */
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            padding-top: 20px;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            color: #fff;
+            padding-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul li a {
+            display: block;
+            padding: 10px 30px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #555;
+        }
+
+        .title {
+            margin-left: 150px;
+            padding: 20px;
+        }
+
+        /* Style for the content area */
+        .content {
+            margin-left: 150px;
+            padding: 20px;
+        }
+
+        .form-group {
+            padding: 10px 0;
+        }
+
+        .success {
+            margin-left: 150px;
+            padding: 20px;
+        }
+
+        p.success {
+            font-size: 20px;
+        }
+
+        .card {
+            padding-bottom: 50px;
+        }
+
+        .table-bordered {
+        border: 1px solid #ddd; /* Add a solid border to the table */
+        }
+
+        .table-bordered th,
+        .table-bordered td {
+            border: 1px solid #ddd; /* Add a solid border to table headers and cells */
+            padding: 8px; /* Add padding for better spacing */
+        }
+
+        button {
+            padding: 5px 10px;
+        }
+
+        /* Add more CSS to style the content area as needed */
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <!-- Sidebar content here -->
+        <h2>Sportube Admin</h2>
+        <ul>
+            {% if has_login() %}
+            <li><a href="/sportube/">Start Live Broadcasting</a></li>
+            <!-- <li><a href="/sportube/stop" onclick="showContent('stop')">Stop Live Broadcasting</a></li> -->
+            <li><a href="/sportube/live">Live Video</a></li>
+            <li><a href="/sportube/replay">Replay Video</a></li>
+            <li><a href="/sportube/logout">Log out</a></li>
+            {% endif %}
+            <!-- Add more menu items as needed -->
+        </ul>
+    </div>
+
+    <div class="content">
+        <!-- Content will be inserted here from child templates -->
+        {% block content %}{% endblock %}
+    </div>
+
+    <script>
+        function showContent(contentId) {
+            // Hide all content sections
+            const contentSections = document.querySelectorAll('.content');
+            contentSections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Show the selected content section
+            const selectedContent = document.getElementById(contentId);
+            selectedContent.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

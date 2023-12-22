@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Content specific to the "Start Live Broadcasting" section -->
+<h2 class="title">Start Live Broadcasting</h2>
+<!-- Add your form and content here -->
+<div class="content" id="start">
+    <!-- Dashboard Content -->
+    <!-- <form method="post" action="/insert_livebroadcasat"> -->
+    <form method="post" action="/sportube/start_livestream">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="type">Type</label>
+            <select name="type" class="form-control" id="type" required>
+                <option value="0">Live</option>
+                <option value="1">Youtube Link</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select name="category" class="form-control" id="category" required>
+                <option value="Swimming">Swimming</option>
+                <option value="Running">Running</option>
+                <option value="Gymnastic">Gymnastic</option>
+            </select>
+        </div>
+        
+        <div class="form-group" id="youtubeLinkDiv">
+            <label for="youtubeLink">Youtube Link</label>
+            <input type="text" id="youtubeLink" name="youtubeLink" class="form-control" value="Default Value" required>
+        </div>
+
+        <div class="form-group">
+            <label for="content">Content</label>
+            <input type="text" id="content" name="content" class="form-control" required>
+        </div>
+
+        <br>
+        <button type="submit" class="btn btn-primary">Start</button>
+    </form>
+
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Get references to the elements
+    const typeSelect = document.getElementById("type");
+    // const youtubeLinkLabel = document.querySelector("label[for='youtubeLink']");
+    const youtubeLink = document.getElementById("youtubeLinkDiv");
+
+    // Initial visibility check
+    toggleYoutubeLinkElements();
+
+    // Add an event listener to the "Type" select
+    typeSelect.addEventListener("change", toggleYoutubeLinkElements);
+
+    // Function to toggle the visibility of "Youtube Link" elements
+    function toggleYoutubeLinkElements() {
+        if (typeSelect.value === "1") {
+            youtubeLink.style.display = "block";
+        } else {
+            youtubeLink.style.display = "none";
+        }
+    }
+});
+
+</script>
+{% endblock %}
